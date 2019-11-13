@@ -42,12 +42,22 @@ class CatCollectionViewController: UICollectionViewController, UICollectionViewD
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CatCollectionViewCell
         let imageToFetch = ImgurDataInterface.sharedInstance.imageURLs[indexPath.item]
+        var splitURL = imageToFetch.split(separator: ".", omittingEmptySubsequences: false)
+        splitURL[splitURL.count - 2] += "l"
+        // avoid downloading a large image that we will have to resize anyway:
+        // s = Small square (90×90)
+        // b = Big square (160×160)
+        // t = Small thumbnail (160×160)
+        // m = Medium thumbnail (320×320)
+        // l = Large thumbnail (640×640)
+        // h = Huge thumbnail (1024×1024)
+        let joinedURL = splitURL.joined(separator: ".")
         // let cellWidth = cell.frame.width
 
         // Configure the cell
         cell.layer.cornerRadius = 10 // the PDF showed images with rounded corners, so I added this
         cell.label.text = "Fetching\nimage" // placeholder
-        cell.downloadImage(from: URL(string: imageToFetch))
+        cell.downloadImage(from: URL(string: joinedURL))
     
         return cell
     }
