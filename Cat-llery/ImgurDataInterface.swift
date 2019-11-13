@@ -87,5 +87,21 @@ class ImgurDataInterface {
         }.resume()
     }
 
+    // avoid downloading a large image that we will have to resize anyway:
+    // "s" = Small square (90×90)
+    // "b" = Big square (160×160)
+    // "t" = Small thumbnail (160×160)
+    // "m" = Medium thumbnail (320×320)
+    // "l" = Large thumbnail (640×640)
+    // "h" = Huge thumbnail (1024×1024)
+    static func imgurResize(link: String, toSize: String = "l") -> String {
+        if !["s", "b", "t", "m", "l", "h"].contains(toSize) {
+            return link
+        }
+        var splitURL = link.split(separator: ".", omittingEmptySubsequences: false)
+        splitURL[splitURL.count - 2] += toSize
+        let joinedURL = splitURL.joined(separator: ".")
+        return joinedURL
+    }
 
 }
