@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		423D2D10237A664700F29420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D2D0F237A664700F29420 /* AppDelegate.swift */; };
 		423D2D12237A664800F29420 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D2D11237A664800F29420 /* SceneDelegate.swift */; };
-		423D2D14237A664800F29420 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D2D13237A664800F29420 /* ViewController.swift */; };
 		423D2D17237A664800F29420 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D2D15237A664800F29420 /* Main.storyboard */; };
 		423D2D19237A664A00F29420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 423D2D18237A664A00F29420 /* Assets.xcassets */; };
 		423D2D1C237A664A00F29420 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D2D1A237A664A00F29420 /* LaunchScreen.storyboard */; };
+		423D2D24237A7B0C00F29420 /* CatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D2D23237A7B0C00F29420 /* CatCollectionViewController.swift */; };
+		423D2D26237A818C00F29420 /* CatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D2D25237A818C00F29420 /* CatCollectionViewCell.swift */; };
+		C135FDED8A6F27ED4511D901 /* Pods_Cat_llery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2EFFE3FEAD58DEED458E6F /* Pods_Cat_llery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2EFFE3FEAD58DEED458E6F /* Pods_Cat_llery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cat_llery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		423D2D0C237A664700F29420 /* Cat-llery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cat-llery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		423D2D0F237A664700F29420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		423D2D11237A664800F29420 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		423D2D13237A664800F29420 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		423D2D16237A664800F29420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		423D2D18237A664A00F29420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		423D2D1B237A664A00F29420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		423D2D1D237A664A00F29420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		423D2D23237A7B0C00F29420 /* CatCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCollectionViewController.swift; sourceTree = "<group>"; };
+		423D2D25237A818C00F29420 /* CatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCollectionViewCell.swift; sourceTree = "<group>"; };
+		567D4BC837DDE49A38096759 /* Pods-Cat-llery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cat-llery.release.xcconfig"; path = "Target Support Files/Pods-Cat-llery/Pods-Cat-llery.release.xcconfig"; sourceTree = "<group>"; };
+		F841E4F971FBA5497CEB7A7A /* Pods-Cat-llery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cat-llery.debug.xcconfig"; path = "Target Support Files/Pods-Cat-llery/Pods-Cat-llery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C135FDED8A6F27ED4511D901 /* Pods_Cat_llery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				423D2D0E237A664700F29420 /* Cat-llery */,
 				423D2D0D237A664700F29420 /* Products */,
+				DD2476C91DFBE4E080D2671E /* Pods */,
+				E3481D3B9607D4B03A93C0FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +67,32 @@
 			children = (
 				423D2D0F237A664700F29420 /* AppDelegate.swift */,
 				423D2D11237A664800F29420 /* SceneDelegate.swift */,
-				423D2D13237A664800F29420 /* ViewController.swift */,
 				423D2D15237A664800F29420 /* Main.storyboard */,
+				423D2D23237A7B0C00F29420 /* CatCollectionViewController.swift */,
+				423D2D25237A818C00F29420 /* CatCollectionViewCell.swift */,
 				423D2D18237A664A00F29420 /* Assets.xcassets */,
 				423D2D1A237A664A00F29420 /* LaunchScreen.storyboard */,
 				423D2D1D237A664A00F29420 /* Info.plist */,
 			);
 			path = "Cat-llery";
+			sourceTree = "<group>";
+		};
+		DD2476C91DFBE4E080D2671E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F841E4F971FBA5497CEB7A7A /* Pods-Cat-llery.debug.xcconfig */,
+				567D4BC837DDE49A38096759 /* Pods-Cat-llery.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E3481D3B9607D4B03A93C0FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B2EFFE3FEAD58DEED458E6F /* Pods_Cat_llery.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 423D2D20237A664A00F29420 /* Build configuration list for PBXNativeTarget "Cat-llery" */;
 			buildPhases = (
+				09897E01D76184F0A443377A /* [CP] Check Pods Manifest.lock */,
 				423D2D08237A664700F29420 /* Sources */,
 				423D2D09237A664700F29420 /* Frameworks */,
 				423D2D0A237A664700F29420 /* Resources */,
+				B122DABD32EB35CED4092B50 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,12 +163,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09897E01D76184F0A443377A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cat-llery-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B122DABD32EB35CED4092B50 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cat-llery/Pods-Cat-llery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cat-llery/Pods-Cat-llery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cat-llery/Pods-Cat-llery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		423D2D08237A664700F29420 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				423D2D14237A664800F29420 /* ViewController.swift in Sources */,
+				423D2D24237A7B0C00F29420 /* CatCollectionViewController.swift in Sources */,
+				423D2D26237A818C00F29420 /* CatCollectionViewCell.swift in Sources */,
 				423D2D10237A664700F29420 /* AppDelegate.swift in Sources */,
 				423D2D12237A664800F29420 /* SceneDelegate.swift in Sources */,
 			);
@@ -282,6 +355,7 @@
 		};
 		423D2D21237A664A00F29420 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F841E4F971FBA5497CEB7A7A /* Pods-Cat-llery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +373,7 @@
 		};
 		423D2D22237A664A00F29420 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 567D4BC837DDE49A38096759 /* Pods-Cat-llery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
