@@ -40,7 +40,7 @@ struct ImgurGallerySearchResponse: Decodable {
     let status: Int
 }
 
-class CatCollectionViewController: UICollectionViewController {
+class CatCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
 
     let maxImages = 60
@@ -55,15 +55,11 @@ class CatCollectionViewController: UICollectionViewController {
                 imageURLs.append(image.link!)
             }
         }
-        for item in self.imageURLs {
-            print(item)
-        }
     }
 
     func downloadAndDecode() {
         let imgurCatGallery = "https://api.imgur.com/3/gallery/search/?q=cats"
         let clientId = "1ceddedc03a5d71"
-//        let clientSecret = "63775118a9f912fd91ed99574becf3b375d9eeca"
         guard let url = URL(string: imgurCatGallery) else {
             return
         }
@@ -114,7 +110,6 @@ class CatCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CatCollectionViewCell
-        print(indexPath.item)
         let imageToFetch = imageURLs[indexPath.item]
         
         // Configure the cell
@@ -126,5 +121,24 @@ class CatCollectionViewController: UICollectionViewController {
     }
 
     // MARK: UICollectionViewDelegate
+
+    func cellSizeWhenPerLineThereAre(_ cellsPerLine: Int, inLayout layout: UICollectionViewLayout) -> CGSize {
+        let flowLayout = layout as! UICollectionViewFlowLayout
+        let totalInset: CGFloat = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+        let totalMargin: CGFloat = totalInset + flowLayout.minimumInteritemSpacing * CGFloat(cellsPerLine)
+        let width: CGFloat = (self.collectionView.bounds.width - totalMargin) / CGFloat(cellsPerLine)
+        return CGSize(width: width, height: width)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let sizeWhenThreePerLine =  cellSizeWhenPerLineThereAre(3, inLayout: collectionViewLayout)
+
+        if sizeWhenThreePerLine.width > CGFloat(240) {
+            return sizeWhenThreePerLine
+        }
+        return cellSizeWhenPerLineThereAre(2, inLayout: collectionViewLayout)
+    }
+
 
 }
