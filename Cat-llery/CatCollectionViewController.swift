@@ -10,80 +10,10 @@ import UIKit
 
 private let reuseIdentifier = "Cat Cell"
 
-struct ImgurImages: Decodable {
-    let id: String?
-    let title: String?
-    let type: String?
-    let animated: Bool?
-    let link: String?
-}
-
-struct ImgurGalleryItem: Decodable {
-    let id: String?
-    let title: String?
-    let datetime: Int?
-    let privacy: String?
-    let views: Int?
-    let link: String?
-    let ups: Int?
-    let downs: Int?
-    let points: Int?
-    let score: Int?
-    let is_album: Bool?
-    let nsfw: Bool?
-    let images: [ImgurImages]?
-}
-
-struct ImgurGallerySearchResponse: Decodable {
-    let data: [ImgurGalleryItem]
-    let success: Bool
-    let status: Int
-}
-
 class CatCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    let maxImages = 60 // limits the amount of images that will be downloaded and displayed to the user
 
-    let maxImages = 60
-    var imageURLs: [String] = []
-
-    func buildImageCollection(from data: [ImgurGalleryItem]) {
-        for item in data {
-            for image in item.images ?? [] {
-                if image.link == nil || image.type?.contains("video/") ?? true {
-                    continue
-                }
-                imageURLs.append(image.link!)
-            }
-        }
-    }
-
-    func downloadAndDecode() {
-        let imgurCatGallery = "https://api.imgur.com/3/gallery/search/?q=cats"
-        let clientId = "1ceddedc03a5d71"
-        guard let url = URL(string: imgurCatGallery) else {
-            return
-        }
-
-        var urlRequest = URLRequest(url: url)
-
-        urlRequest.setValue("Client-ID \(clientId)", forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
-            guard data != nil else {
-                return
-            }
-            do {
-                let jsonDecoded = try JSONDecoder().decode(ImgurGallerySearchResponse.self, from: data!)
-                if jsonDecoded.status == 200 {
-                    self!.buildImageCollection(from: jsonDecoded.data)
-                    DispatchQueue.main.async {
-                        self!.collectionView.reloadData()
-                    }
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }.resume()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,7 +25,8 @@ class CatCollectionViewController: UICollectionViewController, UICollectionViewD
         // self.collectionView!.register(CatCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
-        self.downloadAndDecode()
+        ImgurDataInterface.sharedInstance.collectionViewController = self
+        ImgurDataInterface.sharedInstance.downloadAndDecode()
     }
 
     // MARK: UICollectionViewDataSource
@@ -105,16 +36,17 @@ class CatCollectionViewController: UICollectionViewController, UICollectionViewD
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(imageURLs.count, maxImages)
+        return min(ImgurDataInterface.sharedInstance.imageURLs.count, maxImages)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CatCollectionViewCell
-        let imageToFetch = imageURLs[indexPath.item]
-        
+        let imageToFetch = ImgurDataInterface.sharedInstance.imageURLs[indexPath.item]
+        // let cellWidth = cell.frame.width
+
         // Configure the cell
-        cell.layer.cornerRadius = 10
-        cell.label.text = "Fetching\nimage"
+        cell.layer.cornerRadius = 10 // the PDF showed images with rounded corners, so I added this
+        cell.label.text = "Fetching\nimage" // placeholder
         cell.downloadImage(from: URL(string: imageToFetch))
     
         return cell
@@ -123,9 +55,12 @@ class CatCollectionViewController: UICollectionViewController, UICollectionViewD
     // MARK: UICollectionViewDelegate
 
     func cellSizeWhenPerLineThereAre(_ cellsPerLine: Int, inLayout layout: UICollectionViewLayout) -> CGSize {
+        if cellsPerLine < 1 { // shoud never happen
+            return CGSize(width: 0.0, height: 0.0)
+        }
         let flowLayout = layout as! UICollectionViewFlowLayout
         let totalInset: CGFloat = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-        let totalMargin: CGFloat = totalInset + flowLayout.minimumInteritemSpacing * CGFloat(cellsPerLine)
+        let totalMargin: CGFloat = totalInset + flowLayout.minimumInteritemSpacing * (CGFloat(cellsPerLine) - 1)
         let width: CGFloat = (self.collectionView.bounds.width - totalMargin) / CGFloat(cellsPerLine)
         return CGSize(width: width, height: width)
     }
@@ -134,10 +69,10 @@ class CatCollectionViewController: UICollectionViewController, UICollectionViewD
 
         let sizeWhenThreePerLine =  cellSizeWhenPerLineThereAre(3, inLayout: collectionViewLayout)
 
-        if sizeWhenThreePerLine.width > CGFloat(240) {
+        if sizeWhenThreePerLine.width >= CGFloat(240) {
             return sizeWhenThreePerLine
         }
-        return cellSizeWhenPerLineThereAre(2, inLayout: collectionViewLayout)
+        return cellSizeWhenPerLineThereAre(2, inLayout: collectionViewLayout) // if the images would be too small, we only draw two per line
     }
 
 
