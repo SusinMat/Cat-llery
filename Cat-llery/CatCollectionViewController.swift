@@ -25,8 +25,14 @@ class CatCollectionViewController: UICollectionViewController, UICollectionViewD
         // self.collectionView!.register(CatCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        if #available(iOS 11.0, *) {
+            if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+                flowLayout.sectionInsetReference = .fromSafeArea // add inset to stop one of the cells from getting under the iPhone 11 notch when in horizontal orientation
+            }
+        }
         ImgurDataInterface.sharedInstance.collectionViewController = self
         ImgurDataInterface.sharedInstance.downloadAndDecode()
+
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -69,7 +75,7 @@ class CatCollectionViewController: UICollectionViewController, UICollectionViewD
             return CGSize(width: 0.0, height: 0.0)
         }
         let flowLayout = layout as! UICollectionViewFlowLayout
-        let totalInset: CGFloat = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+        let totalInset: CGFloat = flowLayout.sectionInset.left + self.view.safeAreaInsets.left + flowLayout.sectionInset.right + self.view.safeAreaInsets.right
         let totalMargin: CGFloat = totalInset + flowLayout.minimumInteritemSpacing * (CGFloat(cellsPerLine) - 1)
         let width: CGFloat = (self.collectionView.bounds.width - totalMargin) / CGFloat(cellsPerLine)
         return CGSize(width: width, height: width)
